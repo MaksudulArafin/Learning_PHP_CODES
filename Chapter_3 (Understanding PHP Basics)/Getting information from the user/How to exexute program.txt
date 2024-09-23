@@ -1,0 +1,91 @@
+To execute the PHP and HTML code snippets you've provided, follow these steps:
+
+### Prerequisites
+1. **Install a Local Server**: Make sure you have a local server environment set up. You can use software like XAMPP, MAMP, or WAMP. This will allow you to run PHP files locally.
+
+2. **Start the Server**: Launch the server application and start the Apache server.
+
+### Creating the Files
+1. **Create a Project Directory**: Navigate to your server's root directory (for XAMPP, it’s usually `C:\xampp\htdocs`). Create a new folder for your project, e.g., `bookstore`.
+
+2. **Create `index.php`**: Open a text editor (like VSCode, Sublime Text, or Notepad++) and create a file named `index.php`. Copy the following code into it:
+
+   ```php
+   <?php
+   $looking = isset($_GET['title']) || isset($_GET['author']);
+   ?>
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>Bookstore</title>
+   </head>
+   <body>
+       <p>You lookin'? <?php echo (int) $looking; ?></p>
+       <p>The book you are looking for is</p>
+       <ul>
+           <li><b>Title</b>: <?php echo isset($_GET['title']) ? $_GET['title'] : 'N/A'; ?></li>
+           <li><b>Author</b>: <?php echo isset($_GET['author']) ? $_GET['author'] : 'N/A'; ?></li>
+       </ul>
+   </body>
+   </html>
+   ```
+
+3. **Create `login.html`**: Create another file named `login.html` and add the following code:
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>Bookstore - Login</title>
+   </head>
+   <body>
+       <p>Enter your details to login:</p>
+       <form action="authenticate.php" method="post">
+           <label>Username</label>
+           <input type="text" name="username" />
+           <label>Password</label>
+           <input type="password" name="password" />
+           <input type="submit" value="Login"/>
+       </form>
+   </body>
+   </html>
+   ```
+
+4. **Create `authenticate.php`**: Finally, create a file named `authenticate.php` and add the following code:
+
+   ```php
+   <?php
+   setcookie('username', $_POST['username']);
+   $submitted = !empty($_POST);
+   ?>
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>Bookstore</title>
+   </head>
+   <body>
+       <p>Form submitted? <?php echo (int) $submitted; ?></p>
+       <p>Your login info is</p>
+       <ul>
+           <li><b>username</b>: <?php echo $_POST['username']; ?></li>
+           <li><b>password</b>: <?php echo $_POST['password']; ?></li>
+       </ul>
+   </body>
+   </html>
+   ```
+
+### Testing the Application
+1. **Access the Login Page**: Open a web browser and go to `http://localhost/bookstore/login.html`. You should see the login form.
+
+2. **Submit the Form**: Fill in the username and password fields, and click the "Login" button. This will redirect you to `authenticate.php`, displaying your submitted data and setting a cookie for your username.
+
+3. **Access the Home Page**: Open a new tab and go to `http://localhost/bookstore/index.php?author=HarperLee&title=To Kill a Mockingbird`. You should see the book details you passed in the URL.
+
+4. **Check Cookie Data**: After logging in, return to `http://localhost/bookstore/index.php` to see if the username is displayed as part of the page.
+
+### Note
+- Make sure that your server is running whenever you want to access these pages.
+- Cookies may not appear until the page is reloaded or navigated after the login.
