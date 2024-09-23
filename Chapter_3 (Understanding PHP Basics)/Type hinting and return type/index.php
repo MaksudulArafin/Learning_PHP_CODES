@@ -1,5 +1,6 @@
 <!-- page 66 -->
 
+<?php require 'functions_for_logging.php' ?>
 <?php require 'functions.php' ?>
 <!DOCTYPE html>
  <html lang="en">
@@ -51,16 +52,9 @@
             ];
         ?>
         <ul>
-        <?php foreach ($books as $book): ?>
-                <li>
-                    <i><?php echo $book['title']; ?></i>
-                    - <?php echo $book['author']; ?>
-        
-        <?php if (!$book['available']): ?>
-                <b>Not available</b>
-        <?php endif; ?>
-                </li>
-        <?php endforeach; ?>
-            </ul>
+            <?php foreach ($books as $book): ?>
+            <li><?php echo printableTitle($book); ?> </li>
+            <?php endforeach; ?>
+        </ul>
     </body>
  </html>
