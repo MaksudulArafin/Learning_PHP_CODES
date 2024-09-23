@@ -1,6 +1,6 @@
-<!-- page 66 -->
+<!-- page 66&69 -->
 
-
+<?php require 'functions_for_logging.php' ?>
 <?php require 'functions.php' ?>
 <!DOCTYPE html>
  <html lang="en">
@@ -27,29 +27,8 @@
             <p>You are not looking for a book?</p>
             <?php 
         }
-            $books = [
-                [
-                    'title' => 'To Kill A Mockingbird',
-                    'author' => 'Harper Lee',
-                    'available' => true,
-                    'pages' => 336,
-                    'isbn' => 9780061120084
-                ],
-                [
-                    'title' => '1984',
-                    'author' => 'George Orwell',
-                    'available' => true,
-                    'pages' => 267,
-                    'isbn' => 9780547249643
-                ],
-                [
-                    'title' => 'One Hundred Years Of Solitude',
-                    'author' => 'Gabriel Garcia Marquez',
-                    'available' => false,
-                    'pages' => 457,
-                    'isbn' => 9785267006323
-                ],
-            ];
+        $booksJson = file_get_contents(__DIR__ . '/books.json');
+        $books = json_decode($booksJson, true);
         ?>
         <ul>
             <?php foreach ($books as $book): ?>
