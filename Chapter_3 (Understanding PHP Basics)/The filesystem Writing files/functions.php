@@ -9,6 +9,7 @@ function loginMessage() {
     } else {
         return "You are not authenticated.";
     }
+    
  }
 
 
